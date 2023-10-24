@@ -4,13 +4,15 @@ using System.IO;
 
 public static class APIHelper
 {
-    public static Jokes GetNewJoke()
+    public static Response GetNewResponse(string question)
     {
-        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://api.chucknorris.io/jokes/random");
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create("http://127.0.0.1:5000/get-questions/" + question);
         HttpWebResponse response = (HttpWebResponse)request.GetResponse();
         StreamReader reader= new StreamReader(response.GetResponseStream());
         string json = reader.ReadToEnd();
 
-        return JsonUtility.FromJson<Jokes>(json);
+        response.Close();
+
+        return JsonUtility.FromJson<Response>(json);
     }
 }

@@ -2,14 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class CreateNewJoke : MonoBehaviour
+public class CreateNewResponse : MonoBehaviour
 {
     public TextMeshProUGUI joketext;
+    public TextMeshProUGUI question;
 
-    public void NewJoke()
+
+    private void Update()
     {
-        Jokes j = APIHelper.GetNewJoke();
-        joketext.text = j.value;
+        if(Input.GetKeyUp(KeyCode.KeypadEnter))
+        {
+            NewResponse();
+        }
+    }
+
+
+    public void NewResponse()
+    {
+        Response j = APIHelper.GetNewResponse(question.text);
+        joketext.text = j.answer;
     }
 }
