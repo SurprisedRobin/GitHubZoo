@@ -1,5 +1,15 @@
 {
   "dependencies": {
+    "com.huggingface.api": {
+      "version": "https://github.com/huggingface/unity-api.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.textmeshpro": "3.0.6",
+        "com.unity.nuget.newtonsoft-json": "3.0.1"
+      },
+      "hash": "31c7aae2ee02c2f3d069f2b9e3e8ddca346a4355"
+    },
     "com.unity.2d.animation": {
       "version": "10.0.2",
       "depth": 1,
@@ -206,6 +216,13 @@
       "dependencies": {
         "com.unity.modules.androidjni": "1.0.0"
       },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.2.1",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.profiling.core": {
