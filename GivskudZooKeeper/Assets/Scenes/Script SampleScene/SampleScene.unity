@@ -679,8 +679,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 36616054}
-        m_TargetAssemblyTypeName: CreateNewJoke, Assembly-CSharp
-        m_MethodName: NewJoke
+        m_TargetAssemblyTypeName: CreateNewResponse, Assembly-CSharp
+        m_MethodName: NewResponse
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
