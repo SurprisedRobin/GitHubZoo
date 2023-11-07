@@ -13,11 +13,12 @@ public class SpeechRecognitionTest : MonoBehaviour
     private AudioClip clip;
     private byte[] bytes;
     private bool recording;
+    public CreateNewResponse CNR;
 
     private void Start()
     {
-        startButton.onClick.AddListener(StartRecording);
-        stopButton.onClick.AddListener(StopRecording);
+        //startButton.onClick.AddListener(StartRecording);
+        //stopButton.onClick.AddListener(StopRecording);
         stopButton.interactable = false;
     }
 
@@ -29,17 +30,17 @@ public class SpeechRecognitionTest : MonoBehaviour
         }
     }
 
-    private void StartRecording()
+    public void StartRecording()
     {
         text.color = Color.white;
         text.text = "Recording...";
-        startButton.interactable = false;
+       startButton.interactable = false;
         stopButton.interactable = true;
         clip = Microphone.Start(null, false, 10, 44100);
         recording = true;
     }
 
-    private void StopRecording()
+    public void StopRecording()
     {
         var position = Microphone.GetPosition(null);
         Microphone.End(null);
@@ -48,6 +49,7 @@ public class SpeechRecognitionTest : MonoBehaviour
         bytes = EncodeAsWAV(samples, clip.frequency, clip.channels);
         recording = false;
         SendRecording();
+        
     }
 
     private void SendRecording()
@@ -59,11 +61,12 @@ public class SpeechRecognitionTest : MonoBehaviour
             text.color = Color.white;
             text.text = response;
             startButton.interactable = true;
+            CNR.NewResponse();
         }, error => {
             text.color = Color.red;
             text.text = error;
             startButton.interactable = true;
-        });
+        }); 
     }
 
     private byte[] EncodeAsWAV(float[] samples, int frequency, int channels)
