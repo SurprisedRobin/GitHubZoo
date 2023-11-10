@@ -1,3 +1,4 @@
+using System.Collections;
 using System.IO;
 using HuggingFace.API;
 using TMPro;
@@ -15,6 +16,9 @@ public class SpeechRecognitionTest : MonoBehaviour
     private bool recording;
     public CreateNewResponse CNR;
 
+    bool heldDown = false;
+    public bool debugTimer = false;
+
     private void Start()
     {
         //startButton.onClick.AddListener(StartRecording);
@@ -24,6 +28,20 @@ public class SpeechRecognitionTest : MonoBehaviour
 
     private void Update()
     {
+
+        if (Input.GetButtonDown("Fire1")&& heldDown == false && debugTimer == false)
+        {
+            debugTimer= true;
+            StartRecording();
+            heldDown = true;
+        }
+
+        if(Input.GetButtonUp("Fire1") && heldDown == true && debugTimer == true)
+        {
+            StopRecording();
+            StartCoroutine(DebugTimer());
+        }
+
         if (recording && Microphone.GetPosition(null) >= clip.samples)
         {
             StopRecording();
@@ -96,5 +114,12 @@ public class SpeechRecognitionTest : MonoBehaviour
             }
             return memoryStream.ToArray();
         }
+    }
+
+    public IEnumerator DebugTimer()
+    {
+        yield return new WaitForSeconds(1);
+        debugTimer= false;
+        heldDown = false;
     }
 }
